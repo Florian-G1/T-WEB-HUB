@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine3.21
+
+WORKDIR /app
+
+# Copier uniquement les fichiers de projet (pour le restore)
+COPY Gunpla.Api/Gunpla.Api.csproj Gunpla.Api/
+COPY Gunpla.Application/Gunpla.Application.csproj Gunpla.Application/
+COPY Gunpla.Domain/Gunpla.Domain.csproj Gunpla.Domain/
+COPY Gunpla.Infrastructure/Gunpla.Infrastructure.csproj Gunpla.Infrastructure/
+
+RUN dotnet restore Gunpla.Api/Gunpla.Api.csproj
+
+COPY . .
+
+EXPOSE 5000
+
+WORKDIR /app/Gunpla.Api
+ENTRYPOINT [ "dotnet", "watch", "run" ]
