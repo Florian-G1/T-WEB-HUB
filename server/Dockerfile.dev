@@ -3,16 +3,15 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine3.21
 WORKDIR /app
 
 # Copier uniquement les fichiers de projet (pour le restore)
-COPY Gunpla.Api/Gunpla.Api.csproj Gunpla.Api/
-COPY Gunpla.Application/Gunpla.Application.csproj Gunpla.Application/
-COPY Gunpla.Domain/Gunpla.Domain.csproj Gunpla.Domain/
-COPY Gunpla.Infrastructure/Gunpla.Infrastructure.csproj Gunpla.Infrastructure/
+COPY Gunpla_600.API/Gunpla_600.API.csproj Gunpla_600.API/
+COPY Gunpla_600.Application/Gunpla_600.Application.csproj Gunpla_600.Application/
+COPY Gunpla_600.Domain/Gunpla_600.Domain.csproj Gunpla_600.Domain/
+COPY Gunpla_600.Infrastructure/Gunpla_600.Infrastructure.csproj Gunpla_600.Infrastructure/
 
-RUN dotnet restore Gunpla.Api/Gunpla.Api.csproj
+RUN dotnet restore Gunpla_600.API/Gunpla_600.API.csproj
 
 COPY . .
 
 EXPOSE 5000
 
-WORKDIR /app/Gunpla.Api
-ENTRYPOINT [ "dotnet", "watch", "run" ]
+ENTRYPOINT [ "dotnet", "watch", "run", "--project", "Gunpla_600.API/Gunpla_600.API.csproj" ]
