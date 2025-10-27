@@ -1,0 +1,41 @@
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    ports:
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    restart: unless-stopped
+  
+  backend:
+    container_name: backend
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    env_file:
+     - .env
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    volumes:
+      - ./server:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+    restart: unless-stopped
+  postgres:
+    container_name: postgres
+    image: postgres:17.6
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
