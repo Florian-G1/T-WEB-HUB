@@ -1,0 +1,19 @@
+name: Block pull_requests to main from unauthorized branches
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  block-push:
+    runs-on: self-hosted
+    steps:
+      - name: Block pull request to main if not from develop or hotfix/*
+        run: |
+          echo "Checking source branch..."
+          SOURCE_BRANCH="${{ github.event.pull_request.head.ref }}"
+          if [[ "$SOURCE_BRANCH" == "develop" || "$SOURCE_BRANCH" == hotfix/* ]]; then
+            echo "✅ Pull request source and target branches are valid."
+          else
+            echo "::error::❌ Pull requests to main are only allowed from develop or hotfix/* branches (current: '$SOURCE_BRANCH')."
+            exit 1
+          fi
