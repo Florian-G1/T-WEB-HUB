@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [[ "$branch" == "main" || "$branch" == "develop" ]]; then
+  echo "🚫  Les commits directs sur '$branch' sont bloqués."
+  echo "👉  Merci de créer une branche feature ou fix."
+  exit 1
+fi
