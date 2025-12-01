@@ -44,15 +44,43 @@ cd Gunpla_600
 
 ---
 
+### **Avec docker**
+
+### 2️⃣ Lancer le projet
+
+#### 📦 Prérequis
+
+- [Docker]
+- [Docker compose]
+- [Taskfile] (optionnel)
+
+#### Lancer le projet
+
+**Avec Taskfile**
+
+```bash
+task dev-build
+```
+
+**Sans Taskfile**
+
+```bash
+docker compose -f docker-compose.dev.yml up -d
+```
+
+### **Sans docker**
+
 ### 2️⃣ Lancer le **back-end**
 
 #### 📦 Prérequis
+
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - SQL Server (ou SQLite pour le dev)
 
 #### ⚙️ Lancer l’API
+
 ```bash
-cd server/Gunpla.Api
+cd server/Gunpla_600.Api
 dotnet restore
 dotnet run
 ```
@@ -64,14 +92,16 @@ dotnet run
 ### 3️⃣ Lancer le **front-end**
 
 #### 📦 Prérequis
+
 - [Node.js](https://nodejs.org/) (v18+ recommandé)
 - [npm](https://www.npmjs.com/) ou [pnpm](https://pnpm.io/)
 
 #### ⚙️ Démarrer le client
+
 ```bash
 cd client
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 > L’application sera disponible sur `http://localhost:5173`.
@@ -81,6 +111,7 @@ npm run dev
 ## 🧩 Stack technique
 
 ### Back-end
+
 - **C# / ASP.NET Core 8**
 - **Entity Framework Core** (accès aux données)
 - **Clean Architecture** (Domain, Application, Infrastructure, API)
@@ -88,6 +119,7 @@ npm run dev
 - **Swagger** (documentation de l’API)
 
 ### Front-end
+
 - **Vue 3** (Composition API)
 - **Vite** (bundler ultra rapide)
 - **Pinia** (store management)
@@ -100,6 +132,7 @@ npm run dev
 ## 🧠 Objectif du projet
 
 Créer une application e-commerce simple mais modulaire, permettant :
+
 - La consultation de produits.
 - L’ajout d’articles au panier.
 - La gestion d’un compte utilisateur.
@@ -111,21 +144,18 @@ Créer une application e-commerce simple mais modulaire, permettant :
 ## 🧑‍💻 Auteur
 
 **Gunpla_600**  
-Développé par [Ton Nom ou Ton Pseudo]  
-📧 Contact : [ton-email@example.com]
+Développé par [Florian GEHIN]
 
 ---
 
 ## ⚖️ Licence
 
-Ce projet est distribué sous la licence **MIT**.  
-Tu es libre de le modifier et de le redistribuer à ta guise.
-
----
+## Ce projet n'est pour l'instant pas sous licence
 
 ### ⭐ Astuce
 
 > Pour une meilleure intégration, configure le **CORS** dans ton back-end (`Program.cs`) :
+
 ```csharp
 builder.Services.AddCors(options =>
 {
@@ -135,8 +165,11 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod());
 });
 ```
+
 Et active-le :
+
 ```csharp
 app.UseCors("AllowClient");
 ```
+
 ---

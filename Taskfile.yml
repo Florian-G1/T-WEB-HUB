@@ -1,0 +1,28 @@
+version: 3
+
+tasks:
+  dev-build:
+    desc: Build and start dev project
+    cmds:
+      - docker compose -f docker-compose.dev.yml up --build -d
+  dev-build-log:
+    desc: Build and start dev project with log
+    cmds:
+      - docker compose -f docker-compose.dev.yml up --build
+  dev:
+    desc: Start dev project
+    cmds:
+      - docker compose -f docker-compose.dev.yml up -d
+  dev-log:
+    desc: Start dev project with log
+    cmds:
+      - docker compose -f docker-compose.dev.yml up
+  dev-stop:
+    desc: Stop dev project
+    cmds:
+      - docker compose -f docker-compose.dev.yml down
+  dev-restart:
+    desc: Restart dev project (stop + build + start)
+    cmds:
+      - task: dev-stop
+      - task: dev-build
