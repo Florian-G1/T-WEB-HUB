@@ -1,6 +1,6 @@
 services:
   frontend:
-    container_name: frontend
+    container_name: g6_dev_frontend
     build:
       context: ./client
       dockerfile: Dockerfile.dev
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
   
   backend:
-    container_name: backend
+    container_name: g6_dev_backend
     build:
       context: ./server
       dockerfile: Dockerfile.dev
@@ -31,6 +31,11 @@ services:
     image: postgres:17.6
     env_file:
       - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     volumes:
