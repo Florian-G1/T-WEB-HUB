@@ -1,0 +1,19 @@
+{
+    "name": "Gunpla API Dev Container",
+    "dockerComposeFile": ["docker-compose.dev.yml"],
+    "service": "backend",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-dotnettools.csharp",
+                "ms-azuretools.vscode-docker"
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/sh"
+            }
+        }
+        },
+    "postCreateCommand": "dotnet restore Gunpla_600.API/Gunpla_600.API.csproj || true",
+    "remoteUser": "root"
+}
