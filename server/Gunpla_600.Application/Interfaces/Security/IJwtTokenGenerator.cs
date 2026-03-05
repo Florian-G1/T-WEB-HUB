@@ -4,5 +4,5 @@ namespace Gunpla_600.Application.Interfaces.Security;
 
 public interface IJwtTokenGenerator
 {
-    string GenerateToken(Users user);
+    string GenerateToken(int userId, string email);
 }
